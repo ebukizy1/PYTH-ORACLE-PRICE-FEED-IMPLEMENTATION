@@ -3,9 +3,12 @@ pragma solidity ^0.8.13;
 
 import {Script, console} from "forge-std/Script.sol";
 import {PriceFeed} from "../src/PriceFeed.sol";
+import {PeerToken} from "../src/PeerToken.sol";
 
 contract CounterScript is Script {
     PriceFeed pricefeed;
+    PeerToken peerToken;
+
     address [] tokens;
     bytes32 [] pricefeedIds;
     address pythcontractAddress = 0x8D254a21b3C86D32F7179855531CE99164721933;
@@ -26,9 +29,18 @@ contract CounterScript is Script {
 
      function run() public {
         vm.startBroadcast();
+        peerToken = new PeerToken(msg.sender);
         pricefeed = new PriceFeed(pythcontractAddress, pricefeedIds, tokens);
 
 
+        console.log("$PEER address", address(peerToken));
+        console.log("Pricefeed address", address(pricefeed));
+
+         pricefeed.addLoanableToken(
+            address(peerToken),
+            DIA_USD
+        );
+        console.log("Loanable Token Added");
 
         vm.stopBroadcast();
     }
