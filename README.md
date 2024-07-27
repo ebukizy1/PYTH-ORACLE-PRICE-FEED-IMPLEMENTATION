@@ -19,11 +19,23 @@ export PRIVATE_KEY=YOUR_PRIVATE_KEY
 forge script script/PriceFeed.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --legacy
 ```
 
+## Testing And Interacting With Contract
+```sh
+#To get pythUpdateData bytes
+node getPriceUpdate.js
+#Add PRICE_UPDATE bytes to env
+export PRICE_UPDATE="0x`cat price_update.txt`"
+# Then you can run any of the following
+forge test --rpc-url https://rpc.test.btcs.network  -vvvvvv
+#or
+forge script script/Interaction.s.sol --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --legacy
+```
+
 ## Deployed Addresses
 
-- _Peer Token `0x17975FB494576ae89D627F904Ec723B87c7C35c8`_
-- _Price Feed `0x1C9f974DF781C6EB3764F21Fe961ba38305213df`_
+- _Peer Token `0x8947D467Cd82AdC456C06027C4bD6f78eC3162cA`_
+- _Price Feed `0x665c8DB8BF8cae9241032A6b52f1ae0F69b832AE`_
 
 New Addresses
-- _Peer Token `0x1EC66e52D13c18809F023948f1ae053025D2c969`_
-- _Price Feed `0x4417E9B86Be5d09331eF8B5a98Af4589228F476E`_
+- _Peer Token `0x8947D467Cd82AdC456C06027C4bD6f78eC3162cA`_
+- _Price Feed `0x665c8DB8BF8cae9241032A6b52f1ae0F69b832AE`_
