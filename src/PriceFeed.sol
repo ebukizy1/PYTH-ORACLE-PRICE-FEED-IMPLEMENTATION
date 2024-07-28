@@ -36,18 +36,24 @@ contract PriceFeed {
 
     function getUsdValue(
         address _token,
-        uint256 _amount,
-        bytes[] calldata pythUpdateData
-    ) public payable returns (uint256) {
+        uint256 _amount
+    )
+        public
+        payable
+        returns (
+            // bytes[] calldata pythUpdateData
+            uint256
+        )
+    {
         // updating price feed
-        uint256 updateFee = pyth.getUpdateFee(pythUpdateData);
-        pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
+        // uint256 updateFee = pyth.getUpdateFee(pythUpdateData);
+        // pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
 
         //
         bytes32 feedId = s_priceFeeds[_token];
         if (feedId == bytes32(0)) revert("Protocol__InvalidToken");
 
-        PythStructs.Price memory _priceStruct = pyth.getPrice(feedId);
+        PythStructs.Price memory _priceStruct = pyth.getPriceUnsafe(feedId);
 
         uint256 price = uint256(int256(_priceStruct.price));
         if (_priceStruct.price < 0) revert("Protocol__NegativePrice");

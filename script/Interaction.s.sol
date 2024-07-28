@@ -15,12 +15,12 @@ contract Interaction is Script {
 
     function run() public {
         vm.startBroadcast();
-        bytes[] memory priceUpdateArray = new bytes[](1);
-        priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
+        // bytes[] memory priceUpdateArray = new bytes[](1);
+        // priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
         uint256 total = priceFeed.getUsdValue{value: 20}(
-            USDC,
-            10000000000000000000000000,
-            priceUpdateArray
+            dai,
+            10
+            // priceUpdateArray
         );
 
         console.log("Trying to get value: ", total);
