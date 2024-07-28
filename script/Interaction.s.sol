@@ -18,7 +18,7 @@ contract Interaction is Script {
         bytes[] memory priceUpdateArray = new bytes[](1);
         priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
         uint256 total = priceFeed.getUsdValue{value: 20}(
-            USDC,
+            dai,
             10000000000000000000000000,
             priceUpdateArray
         );

@@ -8,19 +8,60 @@ contract PriceFeedTest is Test {
     PriceFeed priceFeed;
     address dai = 0x57a8f8b6eD04e92f053C19EFbF1ab8C0314Fe7b0;
     address public USDC = 0x1Fb9EEe6DF9cf79968D2b558AeDE454384498e2a;
+    address public LINK = 0x1Fb9EEe6DF9cf79968D2b558AeDE454384498e2a;
+    address public WBTC = 0x45d341D33624Cc53B1E61f73C076f8A545DA191D;
 
     function setUp() public {
         vm.startBroadcast();
-        priceFeed = PriceFeed(0x665c8DB8BF8cae9241032A6b52f1ae0F69b832AE);
+        priceFeed = PriceFeed(0x0142f2bf5135D3ADD3904d1cCa39a5c2cf21DC1d);
         vm.stopBroadcast();
     }
 
-    function test_getUsdValue() public {
+    function test_getUsdValueDai() public {
+        vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
+        bytes[] memory priceUpdateArray = new bytes[](1);
+        priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
+        uint256 total = priceFeed.getUsdValue{value: 6}(
+            dai,
+            10000000000000000000000000,
+            priceUpdateArray
+        );
+        console.log(total);
+        assert(total > 0);
+    }
+
+    function test_getUsdValueUSDC() public {
         vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
         bytes[] memory priceUpdateArray = new bytes[](1);
         priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
         uint256 total = priceFeed.getUsdValue{value: 6}(
             USDC,
+            10000000000000000000000000,
+            priceUpdateArray
+        );
+        console.log(total);
+        assert(total > 0);
+    }
+
+    function test_getUsdValueWBTC() public {
+        vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
+        bytes[] memory priceUpdateArray = new bytes[](1);
+        priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
+        uint256 total = priceFeed.getUsdValue{value: 6}(
+            WBTC,
+            10000000000000000000000000,
+            priceUpdateArray
+        );
+        console.log(total);
+        assert(total > 0);
+    }
+
+    function test_getUsdValueLINK() public {
+        vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
+        bytes[] memory priceUpdateArray = new bytes[](1);
+        priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
+        uint256 total = priceFeed.getUsdValue{value: 6}(
+            LINK,
             10000000000000000000000000,
             priceUpdateArray
         );

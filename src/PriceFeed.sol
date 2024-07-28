@@ -47,7 +47,7 @@ contract PriceFeed {
         bytes32 feedId = s_priceFeeds[_token];
         if (feedId == bytes32(0)) revert("Protocol__InvalidToken");
 
-        PythStructs.Price memory _priceStruct = pyth.getPrice(feedId);
+        PythStructs.Price memory _priceStruct = pyth.getPriceUnsafe(feedId);
 
         uint256 price = uint256(int256(_priceStruct.price));
         if (_priceStruct.price < 0) revert("Protocol__NegativePrice");
