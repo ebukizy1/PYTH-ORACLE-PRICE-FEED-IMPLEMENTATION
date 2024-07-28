@@ -36,12 +36,18 @@ contract PriceFeed {
 
     function getUsdValue(
         address _token,
-        uint256 _amount,
-        bytes[] calldata pythUpdateData
-    ) public payable returns (uint256) {
+        uint256 _amount
+    )
+        public
+        payable
+        returns (
+            // bytes[] calldata pythUpdateData
+            uint256
+        )
+    {
         // updating price feed
-        uint256 updateFee = pyth.getUpdateFee(pythUpdateData);
-        pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
+        // uint256 updateFee = pyth.getUpdateFee(pythUpdateData);
+        // pyth.updatePriceFeeds{value: updateFee}(pythUpdateData);
 
         //
         bytes32 feedId = s_priceFeeds[_token];

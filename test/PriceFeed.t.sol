@@ -13,20 +13,16 @@ contract PriceFeedTest is Test {
 
     function setUp() public {
         vm.startBroadcast();
-        priceFeed = PriceFeed(0x0142f2bf5135D3ADD3904d1cCa39a5c2cf21DC1d);
+        priceFeed = PriceFeed(0xb37e1bdaCbaC06C212b4D65Af2b4464DE671c220);
         vm.stopBroadcast();
     }
 
     function test_getUsdValueDai() public {
         vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
-        bytes[] memory priceUpdateArray = new bytes[](1);
-        priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
-        uint256 total = priceFeed.getUsdValue{value: 6}(
-            dai,
-            10000000000000000000000000,
-            priceUpdateArray
-        );
-        console.log(total);
+        // bytes[] memory priceUpdateArray = new bytes[](1);
+        // priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
+        uint256 total = priceFeed.getUsdValue(dai, 10);
+        console.log("10 DAI = ", total);
         assert(total > 0);
     }
 
@@ -34,12 +30,12 @@ contract PriceFeedTest is Test {
         vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
         bytes[] memory priceUpdateArray = new bytes[](1);
         priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
-        uint256 total = priceFeed.getUsdValue{value: 6}(
+        uint256 total = priceFeed.getUsdValue(
             USDC,
-            10000000000000000000000000,
-            priceUpdateArray
+            10
+            // priceUpdateArray
         );
-        console.log(total);
+        console.log("10 USDC = ", total);
         assert(total > 0);
     }
 
@@ -47,12 +43,12 @@ contract PriceFeedTest is Test {
         vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
         bytes[] memory priceUpdateArray = new bytes[](1);
         priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
-        uint256 total = priceFeed.getUsdValue{value: 6}(
+        uint256 total = priceFeed.getUsdValue(
             WBTC,
-            10000000000000000000000000,
-            priceUpdateArray
+            10
+            // priceUpdateArray
         );
-        console.log(total);
+        console.log("10 WBTC = ", total);
         assert(total > 0);
     }
 
@@ -60,12 +56,12 @@ contract PriceFeedTest is Test {
         vm.prank(0x380Bff4e8847F9A8F7698569B45EeFb0b41fEd61);
         bytes[] memory priceUpdateArray = new bytes[](1);
         priceUpdateArray[0] = vm.envBytes("PRICE_UPDATE");
-        uint256 total = priceFeed.getUsdValue{value: 6}(
+        uint256 total = priceFeed.getUsdValue(
             LINK,
-            10000000000000000000000000,
-            priceUpdateArray
+            10
+            // priceUpdateArray
         );
-        console.log(total);
+        console.log("10 LINK = ", total);
         assert(total > 0);
     }
 }
